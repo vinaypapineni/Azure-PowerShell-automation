@@ -1,0 +1,39 @@
+name: Azure PowerShell CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-powershell-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install PowerShell
+        uses: PowerShell/PowerShell@v1.2.0
+        with:
+          pwsh-version: '7.4.x'
+
+      - name: Run PowerShell script (syntax check only)
+        shell: pwsh
+        run: |
+          Write-Host "Checking syntax of PowerShell script..."
+          pwsh -Command {
+            $scriptPath = "./Create-AzVM.ps1"
+            if (-Not (Test-Path $scriptPath)) {
+              throw "Script not found: $scriptPath"
+            }
+            try {
+              $content = Get-Content $scriptPath -Raw
+              [System.Management.Automation.Language.Parser]::ParseInput($content, [ref]$null, [ref]$null)
+              Write-Host "✅ Script syntax is valid."
+            } catch {
+              Write-Error "❌ Syntax error: $_"
+              exit 1
+            }
+          }
