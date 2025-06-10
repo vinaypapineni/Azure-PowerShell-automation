@@ -1,0 +1,28 @@
+name: Run PowerShell Script
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  run-powershell:
+    runs-on: ubuntu-latest  # or windows-latest for full PowerShell support
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Check PowerShell Version
+        shell: pwsh
+        run: |
+          pwsh -v
+
+      - name: List files (debug)
+        run: ls -R
+
+      - name: Run PowerShell script
+        shell: pwsh
+        run: |
+          pwsh ./create-vm.ps1
