@@ -17,6 +17,12 @@ jobs:
       - name: List files (debug)
         run: ls -R
 
+      - name: Show current directory and files
+        run: |
+            pwd
+            ls -la
+            ls -la **/*.ps1
+
       - name: Run PowerShell script
         shell: pwsh
         run: |
