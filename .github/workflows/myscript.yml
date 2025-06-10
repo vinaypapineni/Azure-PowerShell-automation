@@ -1,0 +1,20 @@
+name: Run PowerShell Script
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # allows manual run from GitHub UI
+
+jobs:
+  run-powershell:
+    runs-on: ubuntu-latest  # or windows-latest for full PowerShell support
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Run PowerShell script
+        shell: pwsh
+        run: |
+          pwsh ./myscript.ps1
