@@ -24,7 +24,7 @@ jobs:
         run: |
           Write-Host "Checking syntax of PowerShell script..."
           pwsh -Command {
-            $scriptPath = "./Create-AzVM.ps1"
+            $scriptPath = "./Create-VM.ps1"
             if (-Not (Test-Path $scriptPath)) {
               throw "Script not found: $scriptPath"
             }
