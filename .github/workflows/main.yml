@@ -18,3 +18,4 @@ jobs:
         shell: pwsh
         run: |
           pwsh ./myscript.ps1
+          
