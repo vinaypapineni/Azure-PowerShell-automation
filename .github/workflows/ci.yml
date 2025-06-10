@@ -14,10 +14,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install PowerShell
-        uses: PowerShell/PowerShell@v1.2.0
-        with:
-          pwsh-version: '7.4.x'
+      - name: Check PowerShell Version
+        shell: pwsh
+        run: |
+          pwsh -v
 
       - name: Run PowerShell script (syntax check only)
         shell: pwsh
